@@ -146,7 +146,6 @@ resource "azurerm_windows_virtual_machine" "spoke02-vm01" {
     sku       = var.vm_os_sku
     version   = var.vm_os_version
   }
-
 }
 
 resource "azurerm_network_interface" "spoke03-vm01-nic" {

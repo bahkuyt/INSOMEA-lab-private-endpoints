@@ -30,7 +30,7 @@ resource "azurerm_private_endpoint" "spoke01-sa-pe" {
   subnet_id           = azurerm_subnet.spoke01-default-subnet.id
   private_service_connection {
     name                           = "spoke01-${random_string.random.result}-sa-privateserviceconnection"
-    private_connection_resource_id = azurerm_storage_share.share01.id
+    private_connection_resource_id = azurerm_storage_account.spoke01-stracct.id
     subresource_names              = ["file"]
     is_manual_connection           = false
   }
