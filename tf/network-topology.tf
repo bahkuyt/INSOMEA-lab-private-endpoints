@@ -71,7 +71,7 @@ resource "azurerm_subnet" "spoke02-default-subnet" {
 }
 
 resource "azurerm_virtual_network" "spoke03-vnet" {
-  name                = "spoke01-vnet"
+  name                = "spoke03-vnet"
   location            = azurerm_resource_group.spoke03-rg.location
   resource_group_name = azurerm_resource_group.spoke03-rg.name
   address_space       = ["10.224.0.0/21"]

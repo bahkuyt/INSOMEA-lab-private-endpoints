@@ -71,7 +71,7 @@ resource "azurerm_network_interface" "spoke01-vm01-nic" {
 
   ip_configuration {
     name                          = "ipConfig2"
-    subnet_id                     = azurerm_subnet.spoke02-default-subnet.id
+    subnet_id                     = azurerm_subnet.spoke01-default-subnet.id
     private_ip_address_allocation = "Dynamic"
   }
 }
