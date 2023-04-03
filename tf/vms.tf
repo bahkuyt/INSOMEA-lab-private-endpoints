@@ -64,39 +64,26 @@ resource "azurerm_windows_virtual_machine" "onpremise-vm01" {
   }
 }
 
-resource "azurerm_public_ip" "onpremise-vm02-pip" {
-  name                = "onpremise-vm02-pip01"
-  location            = azurerm_resource_group.onpremise-rg.location
-  resource_group_name = azurerm_resource_group.onpremise-rg.name
-  allocation_method   = "Dynamic"
-}
-
-resource "azurerm_network_interface" "onpremise-vm02-nic" {
+resource "azurerm_network_interface" "spoke01-vm01-nic" {
   name                = "onpremise-vm02-ni01"
-  location            = azurerm_resource_group.onpremise-rg.location
-  resource_group_name = azurerm_resource_group.onpremise-rg.name
+  location            = azurerm_resource_group.spoke01-rg.location
+  resource_group_name = azurerm_resource_group.spoke01-rg.name
 
   ip_configuration {
     name                          = "ipConfig2"
-    subnet_id                     = azurerm_subnet.onpremise-default-subnet.id
+    subnet_id                     = azurerm_subnet.spoke02-default-subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.onpremise-vm02-pip.id
   }
 }
 
-resource "azurerm_network_interface_security_group_association" "onpremise_nsg-nic-02" {
-  network_interface_id      = azurerm_network_interface.onpremise-vm02-nic.id
-  network_security_group_id = azurerm_network_security_group.onpremise_nsg.id
-}
-
-resource "azurerm_windows_virtual_machine" "onpremise-vm02" {
+resource "azurerm_windows_virtual_machine" "spoke01-vm01" {
   name                            = "DNS-VM"
-  resource_group_name             = azurerm_resource_group.onpremise-rg.name
-  location                        = azurerm_resource_group.onpremise-rg.location
+  resource_group_name             = azurerm_resource_group.spoke01-rg.name
+  location                        = azurerm_resource_group.spoke01-rg.location
   size                            = var.vm_size
   admin_username                  = "adminuser"
   admin_password                  = var.admin_password
-  network_interface_ids           = [azurerm_network_interface.onpremise-vm02-nic.id]
+  network_interface_ids           = [azurerm_network_interface.spoke01-vm01-nic.id]
 
   os_disk {
     caching              = "ReadWrite"
