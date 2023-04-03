@@ -18,7 +18,7 @@ With these pre-requisites in place, we can focus on building the differentiated 
 
 At the end of this section your base lab build looks as follows:
 
-![image](images/lab-pe.PNG)
+![image](images/lab-pe.png)
 
 ## Task 1 : Deploy Template
 
