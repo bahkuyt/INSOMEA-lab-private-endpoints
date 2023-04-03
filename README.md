@@ -5,7 +5,7 @@ This LAB scenario walks through the use of Azure Private Link with a focus on th
 
 This lab is not a full explanation of Azure Private Link as a technology, please consider the following articles required pre-reading to build foundational knowledge.
 
-- [Introductory video on Private Link](aka.ms/whatisprivatelink) 
+- [Introductory video on Private Link](https://aka.ms/whatisprivatelink) 
 - [High level white paper exploring the requirement for Private Link](https://aka.ms/whyprivatelink)
 
 # Pre-requisites
