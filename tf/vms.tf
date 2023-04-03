@@ -173,7 +173,7 @@ resource "azurerm_windows_virtual_machine" "spoke02-vm01" {
   }
 }
 
-resource "azurerm_network_interface" "spoke02-vm01-nic" {
+resource "azurerm_network_interface" "spoke03-vm01-nic" {
   name                = "spoke03-vm01-ni01"
   location            = azurerm_resource_group.spoke03-rg.location
   resource_group_name = azurerm_resource_group.spoke03-rg.name
