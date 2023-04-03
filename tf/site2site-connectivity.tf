@@ -5,12 +5,6 @@ resource "azurerm_public_ip" "hub-vpngw-ip" {
   resource_group_name = azurerm_resource_group.hub-rg.name
   sku                 = "Standard"
   allocation_method   = "Static"
-
-  tags = {
-    environment = "cloud"
-    deployment  = "terraform"
-    microhack   = "dns-private-resolver"
-  }
 }
 
 resource "azurerm_virtual_network_gateway" "hub-vpngw" {
@@ -35,12 +29,6 @@ resource "azurerm_virtual_network_gateway" "hub-vpngw" {
     private_ip_address_allocation = "Dynamic"
     subnet_id                     = azurerm_subnet.hub-gateway-subnet.id
   }
-
-  tags = {
-    environment = "cloud"
-    deployment  = "terraform"
-    microhack   = "dns-private-resolver"
-  }
 }
 
 resource "azurerm_public_ip" "onpremise-vpngw-ip" {
@@ -49,12 +37,6 @@ resource "azurerm_public_ip" "onpremise-vpngw-ip" {
   resource_group_name = azurerm_resource_group.onpremise-rg.name
   sku                 = "Standard"
   allocation_method   = "Static"
-
-  tags = {
-    environment = "cloud"
-    deployment  = "terraform"
-    microhack   = "dns-private-resolver"
-  }
 }
 
 resource "azurerm_virtual_network_gateway" "onpremise-vpngw" {
@@ -79,12 +61,6 @@ resource "azurerm_virtual_network_gateway" "onpremise-vpngw" {
     private_ip_address_allocation = "Dynamic"
     subnet_id                     = azurerm_subnet.onpremise-gateway-subnet.id
   }
-
-  tags = {
-    environment = "cloud"
-    deployment  = "terraform"
-    microhack   = "dns-private-resolver"
-  }
 }
 
 resource "azurerm_local_network_gateway" "onpremise-lng" {
@@ -98,12 +74,6 @@ resource "azurerm_local_network_gateway" "onpremise-lng" {
     asn                 = azurerm_virtual_network_gateway.hub-vpngw.bgp_settings[0].asn
     bgp_peering_address = azurerm_virtual_network_gateway.hub-vpngw.bgp_settings[0].peering_addresses[0].default_addresses[0]
   }
-
-  tags = {
-    environment = "cloud"
-    deployment  = "terraform"
-    microhack   = "dns-private-resolver"
-  }
 }
 
 resource "azurerm_local_network_gateway" "hub-lng" {
@@ -116,12 +86,6 @@ resource "azurerm_local_network_gateway" "hub-lng" {
   bgp_settings {
     asn                 = azurerm_virtual_network_gateway.onpremise-vpngw.bgp_settings[0].asn
     bgp_peering_address = azurerm_virtual_network_gateway.onpremise-vpngw.bgp_settings[0].peering_addresses[0].default_addresses[0]
-  }
-
-  tags = {
-    environment = "onprem"
-    deployment  = "terraform"
-    microhack   = "dns-private-resolver"
   }
 }
 
