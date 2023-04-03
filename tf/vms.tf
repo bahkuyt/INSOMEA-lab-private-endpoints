@@ -1,17 +1,3 @@
-resource "random_string" "asa" {
-  length  = 4
-  special = "false"
-  upper   = "false"
-}
-
-resource "azurerm_storage_account" "onpremise-sa" {
-  name                     = "onpremisesa${random_string.asa.result}"
-  location                 = azurerm_resource_group.onpremise-rg.location
-  resource_group_name      = azurerm_resource_group.onpremise-rg.name
-  account_replication_type = "LRS"
-  account_tier             = "Standard"
-}
-
 resource "azurerm_public_ip" "onpremise-vm01-pip" {
   name                = "onpremise-vm01-pip01"
   location            = azurerm_resource_group.onpremise-rg.location
@@ -76,10 +62,6 @@ resource "azurerm_windows_virtual_machine" "onpremise-vm01" {
     sku       = var.vm_os_sku
     version   = var.vm_os_version
   }
-
-  boot_diagnostics {
-    storage_account_uri = azurerm_storage_account.onpremise-sa.primary_blob_endpoint
-  }
 }
 
 resource "azurerm_public_ip" "onpremise-vm02-pip" {
@@ -129,9 +111,6 @@ resource "azurerm_windows_virtual_machine" "onpremise-vm02" {
     version   = var.vm_os_version
   }
 
-  boot_diagnostics {
-    storage_account_uri = azurerm_storage_account.onpremise-sa.primary_blob_endpoint
-  }
 }
 resource "azurerm_network_interface" "spoke02-vm01-nic" {
   name                = "spoke02-vm01-ni01"
@@ -168,9 +147,6 @@ resource "azurerm_windows_virtual_machine" "spoke02-vm01" {
     version   = var.vm_os_version
   }
 
-  boot_diagnostics {
-    storage_account_uri = azurerm_storage_account.onpremise-sa.primary_blob_endpoint
-  }
 }
 
 resource "azurerm_network_interface" "spoke03-vm01-nic" {
@@ -208,7 +184,4 @@ resource "azurerm_windows_virtual_machine" "spoke03-vm01" {
     version   = var.vm_os_version
   }
 
-  boot_diagnostics {
-    storage_account_uri = azurerm_storage_account.onpremise-sa.primary_blob_endpoint
-  }
 }
