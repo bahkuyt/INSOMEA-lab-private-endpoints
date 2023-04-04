@@ -65,7 +65,7 @@ resource "azurerm_windows_virtual_machine" "onpremise-vm01" {
 }
 
 resource "azurerm_network_interface" "spoke01-vm01-nic" {
-  name                = "onpremise-vm02-ni01"
+  name                = "spoke01-vm01-ni01"
   location            = azurerm_resource_group.spoke01-rg.location
   resource_group_name = azurerm_resource_group.spoke01-rg.name
 
